@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240605.0",
-    "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/adapter-cloudflare": "^4.4.0",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -25,8 +24,8 @@
     "eslint-plugin-svelte": "^2.36.0",
     "globals": "^15.0.0",
     "prettier": "^3.1.1",
-    "prettier-plugin-svelte": "^3.1.2",
-    "svelte": "^5.0.0-next.1",
+    "prettier-plugin-svelte": "^3.2.4",
+    "svelte": "^5.0.0-next.153",
     "svelte-check": "^3.6.0",
     "tslib": "^2.4.1",
     "typescript": "^5.0.0",
