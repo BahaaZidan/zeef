@@ -35,7 +35,7 @@ export const GET: RequestHandler = async (event) => {
 		console.log('githubUserResponse-end');
 
 		console.log('githubUserResponse.json-start');
-		console.log(JSON.stringify({ githubUserResponse }, null, 3));
+		console.log({ githubUserResponse });
 		const githubUser: GitHubUser = await githubUserResponse.json();
 		console.log(JSON.stringify({ githubUser }, null, 3));
 		console.log('githubUserResponse.json-start');
@@ -87,7 +87,7 @@ export const GET: RequestHandler = async (event) => {
 			}
 		});
 	} catch (e) {
-		console.log(JSON.stringify({ e }, null, 3));
+		console.log({ e });
 		// the specific error message depends on the provider
 		if (e instanceof OAuth2RequestError) {
 			// invalid code
