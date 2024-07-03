@@ -29,6 +29,7 @@ export const GET: RequestHandler = async (event) => {
 			}
 		});
 		const githubUser: GitHubUser = await githubUserResponse.json();
+		console.log(JSON.stringify({ githubUser }, null, 3));
 
 		const db = getDB(event.platform?.env.db);
 		const lucia = getAuth(event.platform?.env.db);
@@ -37,6 +38,8 @@ export const GET: RequestHandler = async (event) => {
 		const existingUser = await db.query.userTable.findFirst({
 			where: (t) => eq(t.github_id, githubUser.id)
 		});
+
+		console.log(JSON.stringify({ githubUser, existingUser }, null, 3));
 
 		if (existingUser) {
 			const session = await lucia.createSession(existingUser.id, {});
@@ -47,6 +50,7 @@ export const GET: RequestHandler = async (event) => {
 			});
 		} else {
 			const userId = generateIdFromEntropySize(10); // 16 characters long
+			console.log(JSON.stringify({ userId }, null, 3));
 
 			// Replace this with your own DB client.
 			await db.insert(userTable).values({
@@ -55,8 +59,13 @@ export const GET: RequestHandler = async (event) => {
 				username: githubUser.login
 			});
 
+			console.log(JSON.stringify({ userId }, null, 3));
+
 			const session = await lucia.createSession(userId, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
+
+			console.log(JSON.stringify({ sessionCookie }, null, 3));
+
 			event.cookies.set(sessionCookie.name, sessionCookie.value, {
 				path: '.',
 				...sessionCookie.attributes
@@ -69,6 +78,7 @@ export const GET: RequestHandler = async (event) => {
 			}
 		});
 	} catch (e) {
+		console.log(JSON.stringify({ e }, null, 3));
 		// the specific error message depends on the provider
 		if (e instanceof OAuth2RequestError) {
 			// invalid code
