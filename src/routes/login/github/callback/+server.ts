@@ -34,8 +34,11 @@ export const GET: RequestHandler = async (event) => {
 		});
 		console.log('githubUserResponse-end');
 
+		console.log('githubUserResponse.json-start');
+		console.log(JSON.stringify({ githubUserResponse }, null, 3));
 		const githubUser: GitHubUser = await githubUserResponse.json();
 		console.log(JSON.stringify({ githubUser }, null, 3));
+		console.log('githubUserResponse.json-start');
 
 		const db = getDB(event.platform?.env.db);
 		const lucia = getAuth(event.platform?.env.db);
