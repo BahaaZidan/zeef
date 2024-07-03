@@ -4,11 +4,16 @@ import { getAuth, getDB, github } from '$lib';
 import type { RequestHandler } from '@sveltejs/kit';
 import { eq } from 'drizzle-orm';
 import { userTable } from '$lib/schema';
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from '$env/static/private';
 
 export const GET: RequestHandler = async (event) => {
 	const code = event.url.searchParams.get('code');
 	const state = event.url.searchParams.get('state');
 	const storedState = event.cookies.get('github_oauth_state') ?? null;
+
+	console.log({ code, state, storedState });
+
+	console.log({ GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET });
 
 	if (!code || !state || !storedState || state !== storedState) {
 		return new Response(null, {
