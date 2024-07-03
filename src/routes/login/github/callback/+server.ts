@@ -22,12 +22,18 @@ export const GET: RequestHandler = async (event) => {
 	}
 
 	try {
+		console.log('validate_start');
 		const tokens = await github.validateAuthorizationCode(code);
+		console.log('validate_end');
+
+		console.log('githubUserResponse-start');
 		const githubUserResponse = await fetch('https://api.github.com/user', {
 			headers: {
 				Authorization: `Bearer ${tokens.accessToken}`
 			}
 		});
+		console.log('githubUserResponse-end');
+
 		const githubUser: GitHubUser = await githubUserResponse.json();
 		console.log(JSON.stringify({ githubUser }, null, 3));
 
