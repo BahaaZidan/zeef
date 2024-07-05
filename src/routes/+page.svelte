@@ -1,8 +1,2 @@
-<script lang="ts">
-	import { SignIn } from '@auth/sveltekit/components';
-</script>
-
-<div>
-	<img src="/img/logo.svg" alt="Company Logo" />
-	<SignIn provider="github" signInPage="login" />
-</div>
+<h1>Welcome to SvelteKit</h1>
+<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
