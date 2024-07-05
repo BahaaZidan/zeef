@@ -1,8 +1,8 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "7153e87c-a9e8-4af7-bc72-64f9a761d106",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "20eba032-bdb0-40e4-95ef-7b97037611a4",
+  "prevId": "7153e87c-a9e8-4af7-bc72-64f9a761d106",
   "tables": {
     "account": {
       "name": "account",
@@ -272,7 +272,7 @@
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "emailVerified": {
