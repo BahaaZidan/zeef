@@ -1,24 +1,27 @@
 <script lang="ts">
-	import { SignIn } from '@auth/sveltekit/components';
+	import MdiGithub from '~icons/mdi/github';
+
+	const providerIcons: Record<string, typeof MdiGithub> = {
+		github: MdiGithub
+	};
 
 	export let data;
 </script>
 
 <div>
-	<div>
-		<h2>
-			<span>Company Z</span>
-		</h2>
-		<div>
-			{#each data.providerMap as provider}
-				<SignIn provider={provider.id} signInPage="login" className="w-full">
-					<div slot="submitButton">
-						<span>
-							Signin with {provider.name}
-						</span>
+	<div class="flex w-full flex-col items-center gap-2">
+		<h2>Login Options</h2>
+
+		{#each data.providerMap as provider}
+			<form method="POST" action="/login">
+				<input type="hidden" name="providerId" value={provider.id} />
+				<button type="submit" class="btn btn-neutral btn-wide">
+					<div class="flex items-center gap-2">
+						{provider.name}
+						<svelte:component this={providerIcons[provider.id]} />
 					</div>
-				</SignIn>
-			{/each}
-		</div>
+				</button>
+			</form>
+		{/each}
 	</div>
 </div>
