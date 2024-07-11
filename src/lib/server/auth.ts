@@ -1,6 +1,8 @@
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { SvelteKitAuth } from '@auth/sveltekit';
 import GitHub from '@auth/sveltekit/providers/github';
+import type { Provider } from '@auth/sveltekit/providers';
+
 import { db } from './db';
 import {
 	accountsTable,
@@ -10,13 +12,27 @@ import {
 	verificationTokensTable
 } from './db/schema';
 
+const providers: Provider[] = [GitHub];
+
 export const { handle, signIn, signOut } = SvelteKitAuth({
+	providers,
+	pages: {
+		signIn: '/login'
+	},
 	adapter: DrizzleAdapter(db, {
 		accountsTable,
 		usersTable,
 		authenticatorsTable,
 		sessionsTable,
 		verificationTokensTable
-	}),
-	providers: [GitHub]
+	})
+});
+
+export const providerMap = providers.map((provider) => {
+	if (typeof provider === 'function') {
+		const providerData = provider();
+		return { id: providerData.id, name: providerData.name };
+	} else {
+		return { id: provider.id, name: provider.name };
+	}
 });

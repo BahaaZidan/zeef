@@ -1,8 +1,9 @@
 <script>
-	import '../app.css';
+	import '../../app.css';
 	import MdiMenu from '~icons/mdi/menu';
 	import MdiSearch from '~icons/mdi/search';
 	import MdiNotificationsNone from '~icons/mdi/notifications-none';
+	import { signOut } from '@auth/sveltekit/client';
 </script>
 
 <div class="navbar bg-base-100">
@@ -11,13 +12,10 @@
 			<div tabindex="0" role="button" class="btn btn-circle btn-ghost">
 				<MdiMenu />
 			</div>
-			<ul
-				tabindex="0"
-				class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
-			>
-				<li><a>Homepage</a></li>
-				<li><a>Portfolio</a></li>
-				<li><a>About</a></li>
+			<ul class="menu dropdown-content menu-sm z-[1] mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
+				<li><a href="/about">About</a></li>
+				<li><a href="/login">Login</a></li>
+				<li><button on:click={() => signOut()}>Logout</button></li>
 			</ul>
 		</div>
 	</div>
