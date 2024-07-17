@@ -1,4 +1,14 @@
-import { boolean, timestamp, pgTable, text, primaryKey, integer } from 'drizzle-orm/pg-core';
+import {
+	boolean,
+	timestamp,
+	pgTable,
+	text,
+	primaryKey,
+	integer,
+	uuid,
+	pgEnum
+} from 'drizzle-orm/pg-core';
+import ISO6391, { type LanguageCode } from 'iso-639-1';
 
 export const usersTable = pgTable('user', {
 	id: text('id')
@@ -77,3 +87,20 @@ export const authenticatorsTable = pgTable(
 		})
 	})
 );
+
+export const languageEnum = pgEnum(
+	'language',
+	ISO6391.getAllCodes() as unknown as readonly [string, ...string[]]
+);
+
+export const pagesTable = pgTable('page', {
+	id: uuid('id').primaryKey(),
+	creator: text('creator')
+		.notNull()
+		.references(() => usersTable.id, { onDelete: 'cascade' }),
+	createdAt: timestamp('createdAt', { withTimezone: true }).notNull().defaultNow(),
+	title: text('title').notNull(),
+	url: text('url').notNull(),
+	language: languageEnum('language').$type<LanguageCode>().notNull(),
+	image: text('image')
+});

@@ -8,6 +8,20 @@
       "when": 1720268001309,
       "tag": "0000_complete_falcon",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1721246545170,
+      "tag": "0001_last_puma",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1721251470239,
+      "tag": "0002_last_thunderbolt_ross",
+      "breakpoints": true
     }
   ]
 }
