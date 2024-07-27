@@ -7,7 +7,8 @@ export const prerender = true;
 export const load: LayoutServerLoad = async () => {
 	const parser = new Parser();
 
-	const posts = (
+	const posts = // TODO: introduce fault tolerance
+	(
 		await Promise.all(
 			sources.map(async (src) => {
 				const feed = await parser.parseURL(src);
